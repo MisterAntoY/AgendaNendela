@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import Link from 'next/link'
 import { Plus, Trash2, Calendar } from 'lucide-react'
 import type { Subject, Class, ClassFormData } from '@/lib/types'
 import { DAYS_OF_WEEK, CLASS_TYPES } from '@/lib/types'
@@ -280,7 +281,7 @@ export default function HorarioPage() {
               Para criares o teu horario, precisas de adicionar as tuas disciplinas.
             </p>
             <Button className="mt-6" asChild>
-              <a href="/app/disciplinas">Ir para disciplinas</a>
+              <Link href="/app/disciplinas">Ir para disciplinas</Link>
             </Button>
           </CardContent>
         </Card>

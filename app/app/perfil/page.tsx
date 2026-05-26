@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/components/providers/auth-provider'
 import { createClient } from '@/lib/supabase/client'
 import { useMutation } from '@tanstack/react-query'
@@ -24,6 +24,18 @@ export default function PerfilPage() {
   })
   const [successMessage, setSuccessMessage] = useState('')
   const supabase = createClient()
+
+  useEffect(() => {
+    if (profile && !isEditing) {
+      setFormData({
+        full_name: profile.full_name,
+        school: profile.school,
+        course: profile.course,
+        year: profile.year,
+        avatar_url: profile.avatar_url,
+      })
+    }
+  }, [profile, isEditing])
 
   const updateMutation = useMutation({
     mutationFn: async (data: ProfileFormData) => {

@@ -49,25 +49,21 @@ function StudyTimer({
   const [isRunning, setIsRunning] = useState(false)
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
+    if (!isRunning) return
 
-    if (isRunning && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            setIsRunning(false)
-            onComplete()
-            return 0
-          }
-          return prev - 1
-        })
-      }, 1000)
-    }
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          setIsRunning(false)
+          onComplete()
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
 
-    return () => {
-      if (interval) clearInterval(interval)
-    }
-  }, [isRunning, timeLeft, onComplete])
+    return () => clearInterval(interval)
+  }, [isRunning, onComplete])
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)

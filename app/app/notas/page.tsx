@@ -1,7 +1,7 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { GraduationCap } from 'lucide-react'
@@ -23,7 +23,6 @@ function getGradeColor(value: number, maxValue: number) {
 
 export default function NotasPage() {
   const supabase = createClient()
-  const queryClient = useQueryClient()
 
   const { data: subjects = [] } = useQuery({
     queryKey: ['subjects'],
